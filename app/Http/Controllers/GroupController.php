@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public static function isUserBelongToChat($chatId){
-        return Group::all()->where('chat_id', $chatId)->where('user_id', auth()->user()->id) != null;
-    }
-
     public static function returnChats(){
             $chats = array();
             $chats_id = Group::all()->where('user_id', auth()->user()->id);

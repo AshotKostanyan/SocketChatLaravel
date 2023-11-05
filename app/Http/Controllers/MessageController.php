@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
-use App\Events\UserSendEvent;
 use App\Models\Message;
 use App\Models\User;
 use DB;
