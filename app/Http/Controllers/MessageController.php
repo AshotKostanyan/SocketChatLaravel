@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    private static function addMessage($chat_id, string $message){
+    private static function addMessage($chat_id, string $message):void{
         Message::create([
             "user_id" => auth()->user()->id,
             "chat_id" => $chat_id,
             "message" => $message
         ]);
     }
-    public static function send(string $chatname,string $message){
+    public static function send(string $chatname,string $message):void{
         try{
             DB::beginTransaction();
                 MessageSent::dispatch($chatname, $message);

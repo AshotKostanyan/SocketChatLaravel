@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SessionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -18,13 +19,10 @@ class SessionController extends Controller
     }
 
 
-    public function store(){
+    public function store(SessionRequest $request){
+        $validated = $request->validated();
 
-        $attributes = request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
-        if(auth()->attempt($attributes)){
+        if(auth()->attempt($validated)){
 
             return redirect('/');
         }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function sendMessage(Request $request,$chatname){
+    public function sendMessage(Request $request,string $chatname){
         MessageController::send($chatname, $request->input("message"));
         return ChatController::getChatMessages($chatname);
     }

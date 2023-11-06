@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public static function returnChats(){
+    public static function returnChats():array{
             $chats = array();
             $chats_id = Group::all()->where('user_id', auth()->user()->id);
             foreach ($chats_id as $chat_id){

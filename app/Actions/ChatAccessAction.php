@@ -9,7 +9,11 @@ use App\Models\Message;
 
 class ChatAccessAction
 {
-    public function handle($chat_name){
+
+    //*
+    public string $chat_name;
+    //*
+    public function handle(string $chat_name){
         return Group::all()->where('chat_id', ChatController::getChatId($chat_name))->where('user_id', auth()->user()->id) != null;
     }
 }

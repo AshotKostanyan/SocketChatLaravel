@@ -16,11 +16,14 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
-    public $chatname;
-    public $user_id;
 
-    public function __construct($chatname,$message)
+    // **
+    public string $message;
+    public string $chatname;
+    //*
+
+
+    public function __construct(string $chatname, string $message)
     {
         $this->message = $message;
         $this->chatname = str_replace(' ','',$chatname);
