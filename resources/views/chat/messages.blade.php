@@ -43,11 +43,13 @@
 
             let a = '{{$chatName}}';
             let chatname = a.replace(' ','');
-            window.Echo.private(`chat.${chatname}`)
-                .listen('MessageSent', function (e) {
-
-                    const node_mgs  = document.createTextNode(e.message+'  ');
-                    document.getElementById("content").appendChild(node_mgs)
+            window.Echo.channel(`chat.${chatname}`)
+                .listen('MessageSend', function (e) {
+                    console.log(e.chatname);
+                    if(e.message != ''){
+                        const node_mgs  = document.createTextNode(e.message+'  ');
+                        document.getElementById("content").appendChild(node_mgs)
+                    }
                 });
         }
 

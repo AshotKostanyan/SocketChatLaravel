@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\MessageSent;
+use App\Events\MessageSend;
 use App\Models\Message;
 use App\Models\User;
 use DB;
@@ -20,7 +20,7 @@ class MessageController extends Controller
     public static function send(string $chatname,string $message):void{
         try{
             DB::beginTransaction();
-                MessageSent::dispatch($chatname, $message);
+                MessageSend::dispatch($chatname, $message);
                 $chat_id = ChatController::getChatId($chatname);
                 self::addMessage($chat_id,$message);
             DB::commit();

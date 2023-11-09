@@ -11,9 +11,10 @@ class ChatAccessAction
 {
 
     //*
-    public string $chat_name;
+    private string $chatname;
     //*
-    public function handle(string $chat_name){
-        return Group::all()->where('chat_id', ChatController::getChatId($chat_name))->where('user_id', auth()->user()->id) != null;
+    public function handle(string $chatname):bool{
+        dd($chatname);
+        return Group::all()->where('chat_id', ChatController::getChatId($chatname))->where('user_id', auth()->user()->id) != null;
     }
 }

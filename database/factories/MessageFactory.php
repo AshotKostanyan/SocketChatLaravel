@@ -17,7 +17,7 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => '43',
+            'user_id' => '2',
             'chat_id' => '1',
             'message' =>'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis reprehenderit suscipit sint laboriosam dicta eaque eum, quod harum aliquam, placeat ratione et aliquid. Ut amet hic facere perferendis, vitae incidunt.',
         ];

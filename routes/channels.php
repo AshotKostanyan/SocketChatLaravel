@@ -24,5 +24,6 @@ use Illuminate\Support\Facades\Broadcast;
 //
 
 Broadcast::channel('chat.{chatname}', function ($chatname, ChatAccessAction $action) {
+    dd($chatname);
     return $action->handle($chatname);
 });

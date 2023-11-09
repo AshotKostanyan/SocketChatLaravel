@@ -17,7 +17,7 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => '43',
+            'user_id' => '2',
             'chat_id' => '1'
         ];
     }
