@@ -5,6 +5,7 @@ use App\Events\GroupEvent;
 use App\Events\MessageSent;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
+use App\Models\Group;
 use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
@@ -43,7 +44,6 @@ Route::get('/{chatname}/send', [UserController::class, 'sendMessage'])->name('se
 
 //-----------------test=-------
 // Route::get('/test', function(Request $request) {
-//     GroupEvent::dispatch('data');
 //     return view('welcome');
 // });
 // Route::get('/test1', function(){

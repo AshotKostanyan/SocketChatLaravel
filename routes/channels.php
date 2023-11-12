@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Broadcast;
 //     return (int) $user->id === (int) $id;
 //
 
-Broadcast::channel('chat.{chatname}', function ($chatname, ChatAccessAction $action) {
-    dd($chatname);
+Broadcast::channel('chat.{chatname}', function (string $chatname, ChatAccessAction $action) {
     return $action->handle($chatname);
 });

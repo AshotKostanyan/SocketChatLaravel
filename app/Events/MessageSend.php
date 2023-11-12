@@ -18,13 +18,15 @@ class MessageSend implements ShouldBroadcast
     // **
     public string $message;
     public string $chatname;
+    public string $hashedChatName;
     //*
 
 
     public function __construct(string $chatname, string $message)
     {
+        $this->hashedChatName = hash('sha256',$chatname);
         $this->message = $message;
-        $this->chatname = str_replace(' ','',$chatname);
+        $this->chatname = $chatname;
         $this->user_id = auth()->user()->id;
     }
 
@@ -32,7 +34,7 @@ class MessageSend implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('chat.'.$this->chatname),
+            new Channel('chat.'.$this->hashedChatName),
         ];
     }
 }

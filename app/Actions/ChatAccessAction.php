@@ -14,7 +14,9 @@ class ChatAccessAction
     private string $chatname;
     //*
     public function handle(string $chatname):bool{
+        $chatname = str_replace('_',' ',$chatname);
         dd($chatname);
+
         return Group::all()->where('chat_id', ChatController::getChatId($chatname))->where('user_id', auth()->user()->id) != null;
     }
 }

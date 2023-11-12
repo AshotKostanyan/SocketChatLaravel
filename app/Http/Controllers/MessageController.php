@@ -20,13 +20,13 @@ class MessageController extends Controller
     public static function send(string $chatname,string $message):void{
         try{
             DB::beginTransaction();
-                MessageSend::dispatch($chatname, $message);
+                broadcast(new MessageSend($chatname, $message))->toOthers();
                 $chat_id = ChatController::getChatId($chatname);
                 self::addMessage($chat_id,$message);
             DB::commit();
         }catch(\Exception $e){
             DB::rollBack();
-            dd('error');
+            dd($e);
         }
     }
 }

@@ -33,7 +33,7 @@
         <div class="sender">
             <form action="{{route('send', $chatName)}}" method="get">
                 {{ csrf_field() }}
-                <input name="message" type='text' value="message">
+                <input name="message" type='text'>
                 <button type="submit">SEND</button>
             </form>
         </div>
@@ -41,8 +41,8 @@
     <script>
         window.onload = function() {
 
-            let a = '{{$chatName}}';
-            let chatname = a.replace(' ','');
+            let chatname = '{{$hashedChatName}}';
+            console.log('{{$chatName}}');
             window.Echo.channel(`chat.${chatname}`)
                 .listen('MessageSend', function (e) {
                     console.log(e.chatname);
