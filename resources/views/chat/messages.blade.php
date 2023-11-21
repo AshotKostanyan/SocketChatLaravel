@@ -42,7 +42,6 @@
         window.onload = function() {
 
             let chatname = '{{$hashedChatName}}';
-            console.log('{{$chatName}}');
             window.Echo.channel(`chat.${chatname}`)
                 .listen('MessageSend', function (e) {
                     console.log(e.chatname);

@@ -6,7 +6,7 @@
         }
         .chats .chat{
             height: 100px;
-            width: 100%;
+            width: 100%;s
             display: flex;
         }
         .chats .chat .chat-img{
@@ -23,7 +23,7 @@
                 <a href="/{{$chat[0]->chat_name}}">
                     <div class="chat">
                         <div class="chat-img" style="background-image: {{$chat[0]->image}}"></div>
-                        <div class="chat-name"><p>{{$chat[0]->message}}</p></div>
+                        <div class="chat-name"><p>{{$chat[0]->chat_name}}</p></div>
                     </div>
                 </a>
             @endforeach

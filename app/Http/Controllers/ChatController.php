@@ -19,4 +19,20 @@ class ChatController extends Controller
         $messages =  Message::all()->where('chat_id', $chat_id);
         return view('chat.messages')->with(compact('messages', 'chats','hashedChatName','chatName'));
     }
+
+    public function create(Request $request){
+        try{
+            Chat::create(['chat_name' => $request->input('chat_name')]);
+            $chat = Chat::where('chat_name', $request->input('chat_name'))->latest();
+            Group::create([
+                'user_id' => auth()->user()->id,
+                'chat_id' => $chat->id,
+            ]);
+
+
+            return view('chat.chat');
+        }catch(\Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
+    }
 }

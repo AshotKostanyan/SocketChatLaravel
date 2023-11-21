@@ -1,0 +1,71 @@
+version: "3.7"
+
+services:
+    web:
+        image: nginx:latest
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./:/var/www
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - app-network
+
+
+    socket:
+      container_name: socket_server
+      restart: unless-stopped
+      image: 'quay.io/soketi/soketi:0.17-16-alpine'
+      ports:
+        - "6001:6001"
+        - "9601:9601"
+      environment:
+        PUSHER_APP_KEY: app-key
+        PUSHER_APP_ID: app-id
+        PUSHER_APP_SECRET: app-secret
+        PUSHER_HOST: 127.0.0.1
+        PUSHER_PORT: 6001
+      networks:
+          - app-network
+
+
+    app:
+        build:
+            context: ./Docker
+            dockerfile: Dockerfile
+        image: php-fpm-laravel
+        container_name: app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: app
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        networks:
+            - app-network
+
+    db:
+        image: mysql:8.0
+        container_name: mysql
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_DATABASE: BroadCasting
+          MYSQL_ROOT_PASSWORD: Qwerty_1234@
+        ports:
+            - '3306:3306'
+        networks:
+            - app-network
+#Docker Networks
+networks:
+    app-network:
+        driver: bridge
+#Volumes
+volumes:
+    laravel-mysql-data:

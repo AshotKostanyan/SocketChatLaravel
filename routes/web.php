@@ -36,13 +36,17 @@ Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::get('logout', [SessionController::class, 'destroy'])->middleware('auth');
 
 
+Route::get('/createchat', [ChatController::class,'create']);
+
+
+
 //-------
 Route::get('/', [GroupController::class,'getUserChats']);
-Route::get('/{chatname}', [ChatController::class, 'getChatMessages'])->name('chatname');
-Route::get('/{chatname}/send', [UserController::class, 'sendMessage'])->name('send');
+// Route::get('/{chatname}', [ChatController::class, 'getChatMessages'])->name('chatname');
+// Route::get('/{chatname}/send', [UserController::class, 'sendMessage'])->name('send');
 
 
-//-----------------test=-------
+//-----------------test--------
 // Route::get('/test', function(Request $request) {
 //     return view('welcome');
 // });
