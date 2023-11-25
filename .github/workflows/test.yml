@@ -7,6 +7,6 @@ jobs:
       - name: Get repository code  
         uses: actions/checkout@v4
 
-      - name: Install dependecies
+      - name: Run test command
       # for example install composer
-        run: composer install
+        run: php artisan test --parallel
