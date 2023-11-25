@@ -7,6 +7,19 @@ FROM php:8.2-fpm
 # Set working directory
 WORKDIR /var/www
 
+
+
+
+ENV NODE_VERSION=20.9.0
+
+RUN apt install -y curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install $NODE_VERSION
+RUN . "$NVM_DIR/nvm.sh" && nvm use v$NODE_VERSION
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v$NODE_VERSION
+ENV PATH="/root/.nvm/versions/node/v$NODE_VERSION/bin/:${PATH}"
+
 # Install the necessary software and libraries
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
@@ -41,11 +54,11 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 # Copy existing application directory contents
 COPY . /var/www
 
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
+# # Copy existing application directory permissions
+# COPY --chown=www:www . /var/www
 
-# Change current user to www
-USER www
+# # Change current user to www
+# USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

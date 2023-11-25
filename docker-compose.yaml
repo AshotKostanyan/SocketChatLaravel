@@ -16,6 +16,19 @@ services:
             - app-network
 
 
+    node:
+        container_name: node
+        image: node:lts
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        ports:
+            - "5174:5174"
+
+
+
     socket:
       container_name: socket_server
       restart: unless-stopped
@@ -47,6 +60,8 @@ services:
         working_dir: /var/www
         volumes:
             - ./:/var/www
+        ports:
+            - "8000:8000"            
         networks:
             - app-network
 
@@ -54,10 +69,10 @@ services:
         image: mysql:8.0
         container_name: mysql
         restart: always
-        command: --default-authentication-plugin=mysql_native_password
         environment:
-          MYSQL_DATABASE: BroadCasting
-          MYSQL_ROOT_PASSWORD: Qwerty_1234@
+            MYSQL_USER: ashot    
+            MYSQL_DATABASE: BroadCasting
+            MYSQL_ROOT_PASSWORD: Qwerty_1234@
         ports:
             - '3306:3306'
         networks:
