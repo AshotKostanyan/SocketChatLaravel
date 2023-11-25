@@ -10,5 +10,8 @@ jobs:
       - name: Install composer 
         run: composer install 
 
+      - name: Generate encryption key
+        run: php artisan key:generate
+
       - name: Run test command
         run: php artisan test 
