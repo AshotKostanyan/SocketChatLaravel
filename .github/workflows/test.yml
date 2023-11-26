@@ -11,7 +11,7 @@ jobs:
         run: composer install 
 
       - name: Generate encryption key
-        run: php artisan key:generate
+        run: php artisan key:generate --show
 
       - name: Run test command
         run: php artisan test 
